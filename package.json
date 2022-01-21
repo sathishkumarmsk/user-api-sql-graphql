@@ -23,11 +23,16 @@
     "eslint-plugin-import": "^2.25.4"
   },
   "dependencies": {
+    "@graphql-tools/load-files": "^6.5.3",
+    "@graphql-tools/merge": "^8.2.1",
+    "apollo-server-core": "^3.6.2",
+    "apollo-server-express": "^3.6.2",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",
     "cors": "^2.8.5",
     "express": "^4.17.2",
+    "graphql": "^16.2.0",
     "nodemon": "^2.0.15",
     "sequelize": "^6.13.0",
     "sqlite3": "^5.0.2"
