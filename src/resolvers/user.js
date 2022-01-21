@@ -9,12 +9,9 @@ export default {
     Mutation: {
         createUser: async(_, { email, password }, { db }) => {
             try {
-                const user = {
-                    email,
-                    password,
-                }
+               
                 const userData = await db.user.findOne({ where: { email } });
-                console.log('check user exist', userData);
+                // console.log('check user exist', userData);
                 if (userData === null) {
                     const encryptedPassword = bcrypt.hashSync(password, 10);
                     console.log('Hashed password', encryptedPassword);
@@ -31,19 +28,44 @@ export default {
                 console.log(error);      
             };
         },
-        /*
+        
         loginUser: async(_, { email, password }, { db }) => {
             try {
-                const login = {
-                    email,
-                    password,
-                
-                }, 
-                }
-                   
+             
+                const loginData = await db.user.findOne({ where: { email} });
 
+                if  (loginData === null) {
+                    return ({msg: "Email not found"});
+                }
+
+                const convertString = JSON.stringify(loginData);
+                const passwordData = JSON.parse(convertString);
+
+                const hash = bcrypt.compareSync(password, passwordData.password);
+
+                if (hash === true) {
+                    return true;
+                }
+                return false;
+            }  catch (error) {
+                console.log(error);
+            }; 
+        },
+        deleteUser: async(_, { id }, { db }) => {
+            try {
+                const userData = await db.user.destroy({
+                    where: { id }, 
+                })
+                if (userData) {
+                    return true;
+
+                }
+                return false;
             }
-        }
-        */
+            catch (error) {
+                console.log(error);
+            }
+        },
+        
     }
 }
